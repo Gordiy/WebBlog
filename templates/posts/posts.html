@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% include "navbar.html" %}
+
+{% block content %}
+<div class="container">
+	{% for post in posts %}
+		<div class="post">
+			<div class=".col .col-xs-12 .col-md-8">
+			<header>
+				<h1 class="display-4">{{ post.name }}</h1>
+				<div class="post-meta clearfix">
+					<div class="post-date pull-left">
+						<p class="time">{{ post.updated }}</p>
+					</div>
+				</div>
+			</header>
+			<div>
+				<p></p>
+				<span>
+					<figure class="figure post-figure">
+						<img src="{{post.image.url}}" class="figure-img img-fluid rounde post-image">
+					</figure>
+				</span>
+				<p class="description">{{ post.description }}</p>
+			</div>
+		</div>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}
