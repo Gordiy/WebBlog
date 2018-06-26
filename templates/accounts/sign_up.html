@@ -6,24 +6,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
 
-    <title>Signin Template for Bootstrap</title>
-{% load static %}
-    <!-- Bootstrap core CSS -->
-    <link href=" {% static 'bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'signin.css' %}" rel="stylesheet">
-  </head>
-  {% load bootstrap4 %}
-  <body class="text-center">
-    <form action="/wall/" method="post" class="form-signin">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      {% buttons %}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-      {% endbuttons %}
-    </form>
+<body>
+  {% block content %}
+  <div class="container">
+  <h1 class="display-4">Sign Up</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Next</button>
+    {% endbuttons %}
+  </form>
+  </div>
+  {% endblock %}
 </body>
 
 </html>

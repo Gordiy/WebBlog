@@ -20,6 +20,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from myblog import settings
 
 urlpatterns = [
+    path('accounts/', include('viewers.urls', namespace='viewers')),
 	path('', include('posts.urls')),
 	path('', include('wall.urls')),
     path('admin/', admin.site.urls),

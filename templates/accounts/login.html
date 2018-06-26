@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/ -->
+<html lang="en" style=""><script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://fdcgdnkidjaadafnichfpabhfomcebme/scripts/webrtc-patch.js" async=""></script><link type="text/css" id="dark-mode" rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sign-in/"><style type="text/css" id="dark-mode-custom-style"></style><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+<body>
+  {% block content %}
+  <div class="container">
+  <h1 class="display-4">Sign In</h1>
+  <form action="{% url 'viewers:profile' user.username %}" method="post">
+    {% csrf_token %} 
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Login</button>
+    {% endbuttons %}
+  </form>
+  </div>
+  {% endblock %}
+</body>
+
+</html>
