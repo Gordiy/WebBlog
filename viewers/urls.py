@@ -8,6 +8,6 @@ app_name = 'viewers'
 
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
-    path('login/', views.login, name='login'),
-    path('profile/<username>/', views.profile, name="profile"),
+    path('login/', views.login_user, name='login'),
+    path('profile/', views.profile, name="profile"),
 ]

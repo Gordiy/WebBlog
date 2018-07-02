@@ -15,11 +15,11 @@
   {% block content %}
   <div class="container">
   <h1 class="display-4">Sign In</h1>
-  <form action="{% url 'viewers:profile' user.username %}" method="post">
+  <form method="post">
     {% csrf_token %} 
     {% bootstrap_form form %}
     {% buttons %}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Log In</button>
     {% endbuttons %}
   </form>
   </div>
