@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% include "navbar.html" %}
+
+{% block content %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+<div class="container">
+	<br>
+	<br>
+	<br>
+	<form method="post">
+		{% csrf_token %} 
+		{% bootstrap_form form %}
+    	{% buttons %}
+        	<button type="submit" class="btn btn-secondary">Submit</button>
+    	{% endbuttons %}
+	</form>
+</div>
+{% endblock %}

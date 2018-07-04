@@ -3,25 +3,26 @@ from django.forms import ModelForm
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 from .models import MyUser
+from wall.models import WallImages, MartialStatus
+from django.contrib.auth.forms import UserChangeForm
 
 User = get_user_model()
 
 class UserCreationForm(forms.ModelForm):
+	status = forms.CharField(max_length=50)
+	palace_work = forms.CharField(max_length=50)
+	information = forms.CharField(widget=forms.Textarea)
 	password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
 	password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
 	class Meta: 
-		model = MyUser
+		model = User
 		fields = [
 			'username', 
 			'first_name', 
 			'last_name', 
-			'email', 
-			'status', 
-			'place_work', 
-			'marital_status',
-			'information',
-			'avatar']
+			'email',
+			]
 
 	def clean_password(self):
 		password1 = self.cleaned_data.get('password1')
@@ -48,7 +49,7 @@ class UserLoginForm(forms.Form):
 	def clean(self, *args, **kwargs):
 		query = self.cleaned_data.get('query')
 		password = self.cleaned_data.get('password')
-		user_qs_final = MyUser.objects.filter(
+		user_qs_final = User.objects.filter(
 				Q(username__iexact=query)|
 				Q(email__iexact=query)
 			).distinct()
@@ -59,3 +60,16 @@ class UserLoginForm(forms.Form):
 			raise forms.ValidationError('Credentials are not correct')
 		self.cleaned_data['user_obj'] = user_obj
 		return super(UserLoginForm, self).clean(*args, **kwargs)
+
+
+class EditProfileForm(UserChangeForm):
+
+	class Meta:
+		model = User
+		fields = (
+				'email',
+				'first_name',
+				'last_name',
+				'password'
+			)
+
