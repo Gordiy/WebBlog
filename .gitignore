@@ -1,2 +1,10 @@
 ﻿# ignoring folder ".idea"
 .idea/
+# ignoring foleders"__pycache__"
+myblog/__pycache__/
+posts/__pycache__/
+viewers/__pycache__/
+wall/__pycache__/
+
+
+
