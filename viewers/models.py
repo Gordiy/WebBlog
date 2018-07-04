@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, User
 from django.core.validators import RegexValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -41,4 +41,22 @@ class MyUser(AbstractBaseUser):
 	def has_module_perms(self, app_label):
 		return True
 
+
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	status = models.CharField(max_length=85, blank=True, null=True, default=None)
+	place_work = models.CharField(max_length=36, blank=True, null=True, default=None)
+	city=models.CharField(max_length=100, default='')
+	phone = models.IntegerField(default=12)
+	marital_status = models.ForeignKey(MartialStatus, blank=True, on_delete=models.CASCADE, null=True, default=None)
+	information = models.TextField(blank=True, null=True, default=None)
+
+	def __str__(self):
+		return self.user.username
+
+def create_profile(sender,**kwargs ):
+    if kwargs['created']:
+        user_profile=UserProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile, sender=User)
 		

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from .forms import UserCreationForm
-from .models import MyUser
+from .models import MyUser, UserProfile
 
 class UserAdmin(BaseUserAdmin):
 	add_form = UserCreationForm
@@ -41,3 +41,12 @@ admin.site.register(MyUser, UserAdmin)
 
 
 admin.site.unregister(Group)
+
+
+class UserProfileAdmin(admin.ModelAdmin):
+	list_display = ['user', 'status', 'place_work', 'city', 'phone', 'marital_status', 'information']
+
+	class Meta:
+		model = UserProfile
+
+admin.site.register(UserProfile, UserProfileAdmin)

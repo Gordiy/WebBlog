@@ -9,9 +9,6 @@ from django.contrib.auth.forms import UserChangeForm
 User = get_user_model()
 
 class UserCreationForm(forms.ModelForm):
-	status = forms.CharField(max_length=50)
-	palace_work = forms.CharField(max_length=50)
-	information = forms.CharField(widget=forms.Textarea)
 	password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
 	password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 

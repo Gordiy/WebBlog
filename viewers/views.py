@@ -15,7 +15,10 @@ def signup(request):
 	form = UserCreationForm(request.POST or None)
 	if form.is_valid():
 		form.save()
-		update_session_auth_hash(request, form.user)
+		username = form.cleaned_data['username']
+		password = form.cleaned_data['password1']
+		user = authenticate(username=username, password=password)
+		login(request, user)
 		return HttpResponseRedirect('/accounts/login')
 	args = {
 		'form': form
@@ -63,4 +66,3 @@ def change_password(request):
 		form = PasswordChangeForm(user=request.user)
 		args = {'form': form}
 		return render(request, 'accounts/change_password.html', args)
-
