@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.db.models import Q
 from django.contrib.auth import get_user_model
-from .models import MyUser
+from .models import MyUser, UserProfile
 from wall.models import WallImages, MartialStatus
 from django.contrib.auth.forms import UserChangeForm
 
@@ -36,6 +36,28 @@ class UserCreationForm(forms.ModelForm):
 		if commit:
 			user.save()
 		return user
+
+
+class UserProfileForm(forms.Form):
+	
+	class Meta:
+		model = UserProfile
+		fields = [
+			'status',
+			'place_work',
+			'city',
+			'phone',
+			'marital_status',
+			'information', 
+		]
+
+	def save(self, commit=True):
+		user = super(UserProfileForm, self).save(commit=False)
+
+		if commit:
+			user.save()
+		return user
+
 
 
 class UserLoginForm(forms.Form):

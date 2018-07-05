@@ -42,14 +42,17 @@ class MyUser(AbstractBaseUser):
 		return True
 
 
+#Additional information about user
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	status = models.CharField(max_length=85, blank=True, null=True, default=None)
 	place_work = models.CharField(max_length=36, blank=True, null=True, default=None)
-	city=models.CharField(max_length=100, default='')
-	phone = models.IntegerField(default=12)
+	city = models.CharField(max_length=100, default='')
+	phone = models.IntegerField()
 	marital_status = models.ForeignKey(MartialStatus, blank=True, on_delete=models.CASCADE, null=True, default=None)
 	information = models.TextField(blank=True, null=True, default=None)
+	#avatar = models.ForeignKey(WallImages, blank=True, on_delete=models.CASCADE, null=True, default=None)
+
 
 	def __str__(self):
 		return self.user.username
