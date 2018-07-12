@@ -1,0 +1,10 @@
+p{
+	font-family: FreeMono, monospace;
+	font-size: 16px;
+	color: #828282;
+}
+
+input{
+	border-radius: 3px;
+	width: 300px;
+}

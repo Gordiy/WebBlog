@@ -48,7 +48,7 @@ class UserProfile(models.Model):
 	status = models.CharField(max_length=85, blank=True, null=True, default=None)
 	place_work = models.CharField(max_length=36, blank=True, null=True, default=None)
 	city = models.CharField(max_length=100, default='')
-	phone = models.IntegerField()
+	phone = models.CharField(max_length=20, blank=True, default='')
 	marital_status = models.ForeignKey(MartialStatus, blank=True, on_delete=models.CASCADE, null=True, default=None)
 	information = models.TextField(blank=True, null=True, default=None)
 	#avatar = models.ForeignKey(WallImages, blank=True, on_delete=models.CASCADE, null=True, default=None)

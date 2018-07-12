@@ -24,7 +24,7 @@ def signup(request):
 		password = form.cleaned_data['password1']
 		user_auth = authenticate(username=username, password=password)
 		login(request, user_auth)
-		return HttpResponseRedirect('/accounts/additional_inform/')
+		return HttpResponseRedirect('/accounts/additional_inform/{}/'.format(username))
 	args = {
 		'form': form
 	}
@@ -46,7 +46,6 @@ def login_user(request):
 @login_required
 def additional_inform(request, username):
 	user = User.objects.get(username=username)
-	user_form = UserCreationForm(instance=user)
 
 	ProfileInlineFormset = inlineformset_factory(
 			User,
@@ -65,21 +64,13 @@ def additional_inform(request, username):
 
 	if request.user.is_authenticated and request.user.username  == user.username:
 		if request.method == 'POST':
-			user_form = UserCreationForm(request.POST, request.FILES, instance=user)
 			formset = ProfileInlineFormset(request.POST, request.FILES, instance=user)
 
-			if user_form.is_valid():
-				created_user = user_form.save(commit=False)
-				formset = ProfileInlineFormset(request.POST, request.FILES, instance=created_user)
-
-				if formset.is_valid():
-					created_user.save()
-					formset.save()
-					return HttpResponseRedirect('/accounts/profile')
+			if formset.is_valid():
+				formset.save()
+				return HttpResponseRedirect('/accounts/profile/{}/'.format(user.username))
 
 		return render(request, 'accounts/account_update.html', {
-        		'noodle': username,
-        		'noodle_form': user_form,
         		'formset': formset
         	})
 	else:

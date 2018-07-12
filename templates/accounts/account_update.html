@@ -8,19 +8,22 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% bootstrap_messages %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'up_style.css' %}">
+
 <div class="container">
 	<br>
 	<br>
 	<br>
 	<form method="post">
-		{% csrf_token %} 
-		{% bootstrap_form noodle_form %}
-		 <div class="divider"></div>
-		 {{ formset.management_form }}
-		 {{ formset.as_p }}
-    	{% buttons %}
-        	<button type="submit" class="btn btn-secondary">Submit</button>
-    	{% endbuttons %}
+		{% csrf_token %}
+		<div class="col-6 col-sm-4"> 
+			{{ formset.management_form }}
+			{{ formset.as_p }}
+    		{% buttons %}
+        		<button type="submit" class="btn btn-secondary">Submit</button>
+    		{% endbuttons %}
+    	</div>
 	</form>
 </div>
 {% endblock %}
