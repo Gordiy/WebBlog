@@ -6,7 +6,7 @@ from .forms import (
 	UserCreationForm, 
 	UserLoginForm, 
 	EditProfileForm,
-	UserProfileForm
+	UserProfileForm,
 	)
 from django.http import HttpResponseRedirect
 from django.contrib.auth import update_session_auth_hash
@@ -58,6 +58,7 @@ def additional_inform(request, username):
 	 			'phone',
 	 			'marital_status',
 	 			'information',
+	 			'avatar'
 	 		]
 	 	)
 	formset = ProfileInlineFormset(instance=user)
@@ -68,7 +69,7 @@ def additional_inform(request, username):
 
 			if formset.is_valid():
 				formset.save()
-				return HttpResponseRedirect('/accounts/profile/{}/'.format(user.username))
+				return HttpResponseRedirect('/accounts/profile/')
 
 		return render(request, 'accounts/account_update.html', {
         		'formset': formset
@@ -76,10 +77,26 @@ def additional_inform(request, username):
 	else:
 		HttpResponseRedirect('/accounts/login/')
 
+# Adding user profile photo
+'''
+@login_required
+def profile_photo(request, username):
+	user = User.objects.get(username=username)
+
+	if request.method == 'POST':
+		form = ProfilePhotoForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/accounts/profile/{}/'.format(user.username))
+	else:
+		form = ProfilePhotoForm()
+	return render(request, 'accounts/avatar.html', {'form': form})
+'''
 
 def profile(request):
 	args = {'user': request.user}
 	return render(request, 'accounts/profile.html', args)
+
 
 #You can change user's information
 def edit_profile(request):

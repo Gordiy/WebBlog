@@ -52,6 +52,7 @@ class UserProfile(models.Model):
 	marital_status = models.ForeignKey(MartialStatus, blank=True, on_delete=models.CASCADE, null=True, default=None)
 	information = models.TextField(blank=True, null=True, default=None)
 	#avatar = models.ForeignKey(WallImages, blank=True, on_delete=models.CASCADE, null=True, default=None)
+	avatar = models.FileField(upload_to='avatars/', blank=True, null=True, default=None)
 
 
 	def __str__(self):
@@ -63,3 +64,20 @@ def create_profile(sender,**kwargs ):
 
 post_save.connect(create_profile, sender=User)
 		
+'''
+class ProfilePhoto(models.Model): 
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	name = models.TextField()
+	avatar = models.FileField(upload_to='avatars/', null=True)
+	created = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+	def __str__(self):
+		return self.user.username
+
+
+def user_avatar(sender, **kwargs):
+	if kwargs['created']:
+		profile_photo=ProfilePhoto.objects.create(user=kwargs['instance'])
+
+post_save.connect(user_avatar, sender=User)
+''' 

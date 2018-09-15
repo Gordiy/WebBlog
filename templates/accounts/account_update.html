@@ -15,7 +15,7 @@
 	<br>
 	<br>
 	<br>
-	<form method="post">
+	<form method="POST" action="" enctype="multipart/form-data">
 		{% csrf_token %}
 		<div class="col-6 col-sm-4"> 
 			{{ formset.management_form }}

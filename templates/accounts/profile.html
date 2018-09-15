@@ -5,6 +5,7 @@
 {% block content %}
 <div class="container">
 	<div class="row align-items-start">
+
 		<div class="col-xs-8 col-sm-6">
 			{% load static %}
 			<div class="avatar">
@@ -14,14 +15,19 @@
 				</figure>
 			</div>
 		</div>
+
 		<div class="col-xs-4 col-sm-6">
 			<div class="inform">
 				<p></p>
 				<div class="bloger-full-name">{{user.first_name}} {{user.last_name}}</div>
-				<span class="about-persone">Status: {{user}} </span> <span class="information"></span><br>
-        		<span class="about-persone">Place work: {{user.palace_work}} </span> <span class="information"></span><br>
-        		<span class="about-persone">Martial status:</span> <span class="information"></span><br>
+				<span class="about-persone">Status: {{user.userprofile.status}} </span> <span class="information"></span><br>
+        		<span class="about-persone">Place work: {{user.userprofile.place_work}} </span> <span class="information"></span><br>
+        		<span class="about-persone">Martial status: {{user.userprofile.marital_status}}</span> <span class="information"></span><br>
         	</div>
+		</div>
+
+		<div class="col-xs-12">
+			{{user.userprofile.information}}
 		</div>
 	</div>
 </div>
